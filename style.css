@@ -47,6 +47,10 @@
   flex-direction:column;
 }
 
+textarea {
+  width: 375px;
+}
+
 #select-sport-block {
             display: none; /* Masque la div sport block par défaut */
         }
