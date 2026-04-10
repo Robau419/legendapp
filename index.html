@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,97 +7,156 @@
     <title>Légendage</title>
 </head>
 <body>
-  <div class="container">
-        <div class="legend-make">
-            <div class="default-legend">
-                <h1>Application de légendage photo</h1>
-              <div class="style-select">  
-         <label>
-            <input type="radio" name="type" value="reportage" checked>
-            Reportage
-        </label>
-        <label>
-            <input type="radio" name="type" value="sport" id="sportRadio">
-            Sport
-        </label>
-              </div>
-            <div id="select-sport-block">
-                <fieldset>
-                    <legend>Sport</legend>
-                  <label for="second-team">Nom de l'équipe adverse :</label>
-                  <input type="text" name="secondTeam" id="second-team" placeholder="Equipe 2 (adverse)"/>
-                  <br>
-                  <label>Equipe 1 :</label>
-                  <button id="foot-myf">Football MYF</button>
-                  <button id="rugby">Rugby FCM</button>
-                  <button id="waterpolo">Waterpolo NCM</button>
-                  <button id="foot-ac">Football académie</button>
-                </fieldset>
-                <br>
+
+  <header>
+    <div class="header-inner">
+      <div class="header-logo">&#128247;</div>
+      <div class="header-text">
+        <h1>Légendage Photo</h1>
+        <p class="header-subtitle">Générez vos légendes standardisées</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- Panneau formulaire -->
+      <div class="legend-make">
+        <div class="default-legend">
+
+          <!-- Type de reportage -->
+          <div class="form-section">
+            <div class="style-select">
+              <label class="radio-pill">
+                <input type="radio" name="type" value="reportage" checked>
+                <span>Reportage</span>
+              </label>
+              <label class="radio-pill">
+                <input type="radio" name="type" value="sport" id="sportRadio">
+                <span>Sport</span>
+              </label>
             </div>
-                <div class="block-title">
-                    <label for="title">Titre :</label>
-                    <br>
-                    <input type="text" name="title" rows="4" cols="50" id="title" placeholder="Ecrire le titre de la légende" tabindex="1"/>
-                    <button id="addToDescription">↓</button>
-                    <br>
-                </div>
-                <div class="block-description">
-                    <label for="description">Description :</label>
-                    <br>
-                    <textarea id="description" name="description" rows="4" cols="50" placeholder="Description" tabindex="2"></textarea>
-                </div>
-                <div class="block-city">
-                    <label for="city">Sélectionnez le lieu du reportage :</label>
-                    <br>
-                    <input type="text" id="city" list="city-list" name="city-list" value="" size="22" tabindex="3">
-                    <datalist id="city-list">
-                        <option value="Moulins"></option>
-                        <option value="Toulon-sur-Allier"></option>
-                        <option value="Avermes"></option>
-                        <option value="Yzeure"></option>
-                        <option value="Neuvy"></option>
-                        <option value="Saint-Pourcain-sur-Sioule"></option>
-                        <option value="Souvigny"></option>
-                        <option value="Saint-Pourcain-sur-Besbre"></option>
-                    </datalist>
-                    <button id="citySuppr">Effacer</button>
-                    <br>
-                    <button id="cityMoulins" title="alt+m" accesskey="m">Moulins</button>
-                    <button id="cityYzeure" title="alt+y" accesskey="y">Yzeure</button>
-                    <button id="citySaintPourcainSioule">Saint P/Sioule</button>
-                    <button id="citySaintPourcainBesbre">Saint P/Besbre</button>
-                </div>
-                <div class="block-photo">
-                    <label for="photographer">Photographe :</label>
-                    <input type="text" id="photographer" name="nom" value="Photographe">
-                </div>
-                <div class="key-words">
-                    <label for="textkeywords">Mots-clés :</label>
-                    <br>
-                    <textarea id="textkeywords" name="textkeywords" rows="4" cols="50" placeholder="Mots-clés espacés d'une virgule" tabindex="4"></textarea>
-                </div>
-                <div class="block-date">
-                    <label for="dateInput">Date du reportage :</label>
-                    <br>
-                    <input id="dateInput" type="date" tabindex="5"/>
-                    <input type="radio" id="today" name="today" value="today" checked />
-                    <label for="today">Aujourd'hui</label>
-                </div>
-                <button onclick="generateLegend()" tabindex="6" accesskey="g" title="alt+g">Générer la légende</button>
-              <br>
-                <button id="deleteAll">Réinitialiser</button>
-            </div>    
+          </div>
+
+          <!-- Bloc sport -->
+          <div id="select-sport-block">
+            <fieldset class="sport-fieldset">
+              <legend>Informations sportives</legend>
+              <div class="form-group">
+                <label for="second-team">Équipe adverse</label>
+                <input type="text" name="secondTeam" id="second-team" placeholder="Nom de l'équipe adverse" />
+              </div>
+              <div class="sport-btns">
+                <button id="foot-myf" class="btn-sport">Football MYF</button>
+                <button id="rugby" class="btn-sport">Rugby FCM</button>
+                <button id="waterpolo" class="btn-sport">Waterpolo NCM</button>
+                <button id="foot-ac" class="btn-sport">Football Acad.</button>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- Titre -->
+          <div class="form-group">
+            <label for="title">Titre</label>
+            <div class="input-row">
+              <input type="text" name="title" id="title" placeholder="Titre de la légende" tabindex="1" />
+              <button id="addToDescription" class="btn-icon" title="Insérer dans la description">&#8595;</button>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="3" placeholder="Description de la photo" tabindex="2"></textarea>
+          </div>
+
+          <!-- Ville -->
+          <div class="form-group">
+            <label for="city">Lieu du reportage</label>
+            <div class="input-row">
+              <input type="text" id="city" list="city-list" name="city-list" value="" tabindex="3" placeholder="Saisir ou choisir une ville">
+              <datalist id="city-list">
+                <option value="Avermes"></option>
+                <option value="Moulins"></option>
+                <option value="Neuvy"></option>
+                <option value="Saint-Pourcain-sur-Besbre"></option>
+                <option value="Saint-Pourcain-sur-Sioule"></option>
+                <option value="Souvigny"></option>
+                <option value="Toulon-sur-Allier"></option>
+                <option value="Yzeure"></option>
+              </datalist>
+              <button id="citySuppr" class="btn-icon btn-clear" title="Effacer la ville">&#10005;</button>
+            </div>
+            <!-- Requis par script.js pour la fonction filterCities -->
+            <input type="text" id="searchCity" style="display:none" aria-hidden="true" />
+            <div class="city-chips">
+              <button id="cityMoulins" class="btn-chip" title="Raccourci: alt+m" accesskey="m">Moulins</button>
+              <button id="cityYzeure" class="btn-chip" title="Raccourci: alt+y" accesskey="y">Yzeure</button>
+              <button id="citySaintPourcainSioule" class="btn-chip">St-P/Sioule</button>
+              <button id="citySaintPourcainBesbre" class="btn-chip">St-P/Besbre</button>
+            </div>
+          </div>
+
+          <!-- Photographe -->
+          <div class="form-group">
+            <label for="photographer">Photographe</label>
+            <input type="text" id="photographer" name="nom" value="Photographe" />
+          </div>
+
+          <!-- Mots-clés -->
+          <div class="form-group">
+            <label for="textkeywords">Mots-clés</label>
+            <textarea id="textkeywords" name="textkeywords" rows="3" placeholder="Mots-clés séparés par des virgules" tabindex="4"></textarea>
+          </div>
+
+          <!-- Date -->
+          <div class="form-group">
+            <label for="dateInput">Date du reportage</label>
+            <div class="date-row">
+              <input id="dateInput" type="date" tabindex="5" />
+              <label class="radio-pill compact">
+                <input type="radio" id="today" name="today" value="today" checked />
+                <span>Aujourd'hui</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Boutons d'action -->
+          <div class="form-actions">
+            <button onclick="generateLegend()" class="btn-primary" tabindex="6" accesskey="g" title="Raccourci: alt+g">
+              Générer la légende
+            </button>
+            <button id="deleteAll" class="btn-reset">Réinitialiser</button>
+          </div>
+
         </div>
-        <div id="legend">
-            <p id='titleDisplay'></p>
-            <p id='legendTxt'></p>
-            <button id='copyTitle'>Copier le titre</button>
-            <button id="copyLegend">Copier la légende</button>
+      </div>
+
+      <!-- Panneau aperçu -->
+      <div id="legend">
+        <div class="preview-header">
+          <span class="preview-badge">Aperçu</span>
         </div>
-  </div>
-    
-    <script src="script.js"></script>
+
+        <div class="preview-block">
+          <span class="preview-label">Titre</span>
+          <p id="titleDisplay" class="preview-text"></p>
+          <button id="copyTitle" class="btn-copy">Copier le titre</button>
+        </div>
+
+        <hr class="preview-divider" />
+
+        <div class="preview-block">
+          <span class="preview-label">Légende</span>
+          <p id="legendTxt" class="preview-text"></p>
+          <button id="copyLegend" class="btn-copy">Copier la légende</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
-

@@ -1,52 +1,568 @@
-#legend{
-  border:solid;
-  border-radius:5px;
-  border-color:#fcaa05;
-  display:flex;
-  flex-direction:column;
-  width:400px;
-  margin:5px 5px 5px 5px;
+/* =====================================================
+   Variables
+   ===================================================== */
+:root {
+  --amber-100: #fef3c7;
+  --amber-200: #fde68a;
+  --amber-300: #fcd34d;
+  --amber-400: #fbbf24;
+  --amber-500: #f59e0b;
+  --amber-600: #d97706;
+  --amber-700: #b45309;
+
+  --gray-50:  #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  --red-100: #fee2e2;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+
+  --radius-sm: 6px;
+  --radius:    10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow:    0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 28px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.06);
+
+  --transition: 160ms ease;
 }
 
-.default-legend{
-  border:solid;
-  background-color:#f5d189;
-  border-width:1px;
-  border-color:transparent;
-  border-radius:5px;
-  display:flex;
-  flex-direction:column;
-  padding:20px 20px 20px 20px;
-  margin:5px 5px 5px 5px;
+/* =====================================================
+   Reset & Base
+   ===================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.legend-make{
-  display:flex;
-  flex-direction:row;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+               'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  background: var(--gray-100);
+  color: var(--gray-800);
+  min-height: 100vh;
+  line-height: 1.6;
 }
 
-
-
-#title{
-  flex-direction:column;
-  width:375px;
+/* =====================================================
+   Header
+   ===================================================== */
+header {
+  background: linear-gradient(135deg, var(--amber-700) 0%, var(--amber-500) 100%);
+  color: #fff;
+  padding: 18px 32px;
+  box-shadow: 0 2px 10px rgba(180, 83, 9, 0.35);
 }
 
-.container{
-  display:flex;
-  flex-direction:row;
-  justify-content:center;
-  border:solid;
-  border-width:2px;
-  border-color:#f7cd79;
-  align-items:stretch(default);
+.header-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-.block-photo{
-  display:flex;
-  flex-direction:column;
+.header-logo {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
+.header-text h1 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.header-subtitle {
+  font-size: 0.8rem;
+  opacity: 0.82;
+  margin-top: 2px;
+}
+
+/* =====================================================
+   Main Layout
+   ===================================================== */
+main {
+  padding: 28px 20px 56px;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 22px;
+  align-items: flex-start;
+  border: none;
+}
+
+/* =====================================================
+   Form Panel
+   ===================================================== */
+.legend-make {
+  flex: 1;
+  min-width: 0;
+}
+
+.default-legend {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-200);
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =====================================================
+   Form Groups & Labels
+   ===================================================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group > label,
+.form-group label:first-of-type {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.form-section {
+  /* Container for the type radio row */
+}
+
+/* =====================================================
+   Inputs & Textareas
+   ===================================================== */
+input[type="text"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.88rem;
+  color: var(--gray-800);
+  background: #fff;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+  color: var(--gray-400);
+}
+
+input[type="text"]:hover,
+input[type="date"]:hover,
+textarea:hover {
+  border-color: var(--gray-300);
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+  border-color: var(--amber-400);
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.18);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 76px;
+  line-height: 1.55;
+}
+
+input[type="date"] {
+  width: auto;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* =====================================================
+   Input Row (text field + icon button side by side)
+   ===================================================== */
+.input-row {
+  display: flex;
+  gap: 6px;
+  align-items: stretch;
+}
+
+.input-row input[type="text"] {
+  flex: 1;
+}
+
+/* Old fixed-width override */
+#title {
+  width: auto;
+}
+
+/* =====================================================
+   Date Row
+   ===================================================== */
+.date-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* =====================================================
+   Radio Pills
+   ===================================================== */
+.style-select {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.radio-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  cursor: pointer;
+  padding: 7px 18px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--gray-200);
+  background: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray-500);
+  transition: background var(--transition), border-color var(--transition),
+              color var(--transition), box-shadow var(--transition);
+  user-select: none;
+}
+
+.radio-pill input[type="radio"] {
+  display: none;
+}
+
+/* Active state using :has() – supported in all modern browsers */
+.radio-pill:has(input:checked) {
+  background: var(--amber-500);
+  border-color: var(--amber-500);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.35);
+}
+
+.radio-pill:not(:has(input:checked)):hover {
+  border-color: var(--amber-300);
+  color: var(--amber-700);
+  background: var(--amber-100);
+}
+
+.radio-pill.compact {
+  padding: 5px 14px;
+  font-size: 0.8rem;
+}
+
+/* =====================================================
+   Sport Fieldset
+   ===================================================== */
+.sport-fieldset {
+  border: 1.5px solid var(--amber-200);
+  border-radius: var(--radius);
+  padding: 16px 18px 18px;
+  background: #fffbeb;
+}
+
+.sport-fieldset > legend {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--amber-700);
+  padding: 0 6px;
+}
+
+.sport-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.btn-sport {
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--amber-300);
+  background: #fff;
+  color: var(--amber-700);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition),
+              color var(--transition), transform var(--transition),
+              box-shadow var(--transition);
+}
+
+.btn-sport:hover {
+  background: var(--amber-500);
+  border-color: var(--amber-500);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(245, 158, 11, 0.3);
+}
+
+.btn-sport:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* =====================================================
+   City Quick-Access Chips
+   ===================================================== */
+.city-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.btn-chip {
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--gray-200);
+  background: #fff;
+  color: var(--gray-600);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition),
+              color var(--transition);
+}
+
+.btn-chip:hover {
+  border-color: var(--amber-300);
+  color: var(--amber-700);
+  background: var(--amber-100);
+}
+
+.btn-chip:active {
+  background: var(--amber-200);
+}
+
+/* =====================================================
+   Icon Buttons (↓ and ✕)
+   ===================================================== */
+.btn-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--gray-200);
+  background: #fff;
+  color: var(--gray-500);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  transition: background var(--transition), border-color var(--transition),
+              color var(--transition);
+}
+
+.btn-icon:hover {
+  border-color: var(--amber-300);
+  color: var(--amber-600);
+  background: var(--amber-100);
+}
+
+.btn-clear:hover {
+  border-color: #fca5a5;
+  color: var(--red-600);
+  background: var(--red-100);
+}
+
+/* =====================================================
+   Primary & Reset Action Buttons
+   ===================================================== */
+.form-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 4px;
+}
+
+.btn-primary {
+  padding: 10px 24px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: linear-gradient(135deg, var(--amber-500) 0%, var(--amber-600) 100%);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.28);
+  transition: background var(--transition), transform var(--transition),
+              box-shadow var(--transition);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--amber-600) 0%, var(--amber-700) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(217, 119, 6, 0.38);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(217, 119, 6, 0.2);
+}
+
+.btn-reset {
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--gray-200);
+  background: #fff;
+  color: var(--gray-500);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition),
+              color var(--transition);
+}
+
+.btn-reset:hover {
+  border-color: #fca5a5;
+  color: var(--red-600);
+  background: var(--red-100);
+}
+
+/* =====================================================
+   Preview Panel (#legend)
+   ===================================================== */
+#legend {
+  width: 370px;
+  min-width: 310px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-200);
+  padding: 22px;
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+}
+
+.preview-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--amber-700);
+  background: var(--amber-100);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--amber-200);
+}
+
+.preview-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.preview-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray-400);
+}
+
+.preview-text {
+  font-size: 0.88rem;
+  color: var(--gray-700);
+  line-height: 1.65;
+  min-height: 44px;
+  padding: 12px 13px;
+  background: var(--gray-50);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gray-100);
+  word-break: break-word;
+}
+
+.preview-text:empty::before {
+  content: "—";
+  color: var(--gray-300);
+}
+
+.preview-divider {
+  border: none;
+  border-top: 1px solid var(--gray-100);
+  margin: 0;
+}
+
+.btn-copy {
+  align-self: flex-start;
+  padding: 6px 16px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--amber-300);
+  background: #fff;
+  color: var(--amber-700);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition),
+              color var(--transition), box-shadow var(--transition);
+}
+
+.btn-copy:hover {
+  background: var(--amber-500);
+  border-color: var(--amber-500);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.28);
+}
+
+/* =====================================================
+   Hidden sport block (default state)
+   ===================================================== */
 #select-sport-block {
-            display: none; /* Masque la div sport block par défaut */
-        }
+  display: none;
+}
+
+/* =====================================================
+   Legacy selectors kept for JS compatibility
+   ===================================================== */
+.block-photo {
+  display: flex;
+  flex-direction: column;
+}
