@@ -52,6 +52,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Historique
+    renderHistory();
+    document.getElementById('clear-history').addEventListener('click', function() {
+        saveHistory([]);
+        renderHistory();
+    });
+
     // Autres écouteurs d'événements
     document.getElementById('dateInput').addEventListener('input', generateLegend);
     document.getElementById('city').addEventListener('input', generateLegend);
@@ -61,8 +68,89 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('description').addEventListener('input', generateLegend);
 });
 
+// === HISTORIQUE ===
+const HISTORY_KEY = 'legendapp_history';
+const HISTORY_MAX = 20;
+
+function loadHistory() {
+    try { return JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; }
+    catch { return []; }
+}
+
+function saveHistory(history) {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+}
+
+function addToHistory(title, legend) {
+    if (!title && !legend) return;
+    const history = loadHistory();
+    history.unshift({ id: Date.now(), timestamp: new Date().toISOString(), title, legend });
+    if (history.length > HISTORY_MAX) history.splice(HISTORY_MAX);
+    saveHistory(history);
+    renderHistory();
+}
+
+function deleteHistoryEntry(id) {
+    saveHistory(loadHistory().filter(e => e.id !== id));
+    renderHistory();
+}
+
+function formatTimeAgo(iso) {
+    const diff = Date.now() - new Date(iso).getTime();
+    const m = Math.floor(diff / 60000);
+    const h = Math.floor(diff / 3600000);
+    const d = Math.floor(diff / 86400000);
+    if (m < 1) return "À l'instant";
+    if (m < 60) return `Il y a ${m} min`;
+    if (h < 24) return `Il y a ${h} h`;
+    return `Il y a ${d} j`;
+}
+
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function renderHistory() {
+    const container  = document.getElementById('history-list');
+    const badge      = document.getElementById('history-count');
+    const emptyState = document.getElementById('history-empty');
+    const history    = loadHistory();
+
+    badge.textContent = history.length;
+    container.innerHTML = '';
+
+    if (history.length === 0) {
+        emptyState.style.display = 'block';
+        return;
+    }
+    emptyState.style.display = 'none';
+
+    history.forEach(entry => {
+        const div = document.createElement('div');
+        div.className = 'history-entry';
+        div.innerHTML = `
+            <div class="history-entry-header">
+                <span class="history-time">${formatTimeAgo(entry.timestamp)}</span>
+                <button class="history-delete" title="Supprimer">&#10005;</button>
+            </div>
+            ${entry.title ? `<p class="history-entry-title">${escapeHtml(entry.title)}</p>` : ''}
+            <p class="history-entry-legend">${escapeHtml(entry.legend)}</p>
+            <div class="history-entry-actions">
+                <button class="btn-copy-small js-copy-title">Copier le titre</button>
+                <button class="btn-copy-small js-copy-legend">Copier la légende</button>
+            </div>`;
+
+        div.querySelector('.history-delete').addEventListener('click', () => deleteHistoryEntry(entry.id));
+        div.querySelector('.js-copy-title').addEventListener('click', () => navigator.clipboard.writeText(entry.title));
+        div.querySelector('.js-copy-legend').addEventListener('click', () => navigator.clipboard.writeText(entry.legend));
+        container.appendChild(div);
+    });
+}
+
 // Fonction pour générer la légende
-function generateLegend() {
+function generateLegend(saveToHist = false) {
     const dateInput = document.getElementById('dateInput').value;
     let todayDate = dateInput ? new Date(dateInput) : new Date();
 
@@ -85,6 +173,10 @@ function generateLegend() {
     const legendForm = `${removeAccents(description)} / ${cityInput} / ${formattedDate} / Photo ${creditPhoto} / ${formattedText}`;
     document.getElementById('legendTxt').innerHTML = legendForm;
     document.getElementById('titleDisplay').innerText = title;
+
+    if (saveToHist) {
+        addToHistory(title, legendForm);
+    }
 }
 
 // Fonction pour filtrer les villes

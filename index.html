@@ -124,7 +124,7 @@
 
           <!-- Boutons d'action -->
           <div class="form-actions">
-            <button onclick="generateLegend()" class="btn-primary" tabindex="6" accesskey="g" title="Raccourci: alt+g">
+            <button onclick="generateLegend(true)" class="btn-primary" tabindex="6" accesskey="g" title="Raccourci: alt+g">
               Générer la légende
             </button>
             <button id="deleteAll" class="btn-reset">Réinitialiser</button>
@@ -155,6 +155,20 @@
       </div>
 
     </div>
+
+    <!-- Historique des générations -->
+    <section class="history-section">
+      <div class="history-header">
+        <div class="history-title-row">
+          <h2>Historique</h2>
+          <span class="history-count-badge" id="history-count">0</span>
+        </div>
+        <button id="clear-history" class="btn-clear-history">Tout effacer</button>
+      </div>
+      <p id="history-empty" class="history-empty">Aucune légende générée pour l'instant.<br>Cliquez sur <strong>Générer la légende</strong> pour commencer.</p>
+      <div id="history-list" class="history-list"></div>
+    </section>
+
   </main>
 
   <script src="script.js"></script>
