@@ -174,7 +174,7 @@ function generateLegend(saveToHist = false) {
     document.getElementById('legendTxt').innerHTML = legendForm;
     document.getElementById('titleDisplay').innerText = title;
 
-    if (saveToHist) {
+    if (saveToHist === true) {
         addToHistory(title, legendForm);
     }
 }
