@@ -560,6 +560,31 @@ input[type="date"] {
 }
 
 /* =====================================================
+   Field states
+   ===================================================== */
+
+/* Champ vide : léger fond ambré + bordure gauche */
+input[type="text"].field-empty,
+textarea.field-empty {
+  border-color: var(--amber-300);
+  background: #fffdf0;
+  border-left: 3px solid var(--amber-400);
+}
+
+input[type="text"].field-empty:focus,
+textarea.field-empty:focus {
+  border-color: var(--amber-400);
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.18);
+}
+
+/* Date différente d'aujourd'hui : bordure orange vif */
+input[type="date"].date-warning {
+  border-color: var(--amber-500);
+  background: #fffdf0;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+
+/* =====================================================
    History Section
    ===================================================== */
 .history-section {
