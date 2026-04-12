@@ -52,6 +52,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Etat initial des champs
+    updateFieldStates();
+
+    // Bouton "Aujourd'hui" → remplit la date avec aujourd'hui
+    document.getElementById('today').addEventListener('click', function() {
+        const today = new Date();
+        const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+        document.getElementById('dateInput').value = todayStr;
+        generateLegend();
+    });
+
     // Historique
     renderHistory();
     document.getElementById('clear-history').addEventListener('click', function() {
@@ -149,6 +160,19 @@ function renderHistory() {
     });
 }
 
+// Surbrillance des champs vides + alerte date
+function updateFieldStates() {
+    ['title', 'description', 'city', 'photographer', 'textkeywords'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('field-empty', el.value.trim() === '');
+    });
+
+    const dateEl = document.getElementById('dateInput');
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+    dateEl.classList.toggle('date-warning', !!dateEl.value && dateEl.value !== todayStr);
+}
+
 // Fonction pour générer la légende
 function generateLegend(saveToHist = false) {
     const dateInput = document.getElementById('dateInput').value;
@@ -182,6 +206,8 @@ function generateLegend(saveToHist = false) {
     if (saveToHist === true) {
         addToHistory(title, legendForm);
     }
+
+    updateFieldStates();
 }
 
 // Fonction pour filtrer les villes
@@ -273,6 +299,9 @@ document.getElementById('deleteAll').addEventListener('click', function() {
     document.getElementById('textkeywords').value = "";
     document.getElementById('title').value = "";
     document.getElementById('description').value = "";
+    document.getElementById('titleDisplay').innerText = "";
+    document.getElementById('legendTxt').innerText = "";
+    updateFieldStates();
 });
 
 // Copier le texte de la légende 
