@@ -158,6 +158,10 @@ function generateLegend(saveToHist = false) {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
 
+    function sanitize(str) {
+        return removeAccents(str).replace(/['\u2019]/g, ' ');
+    }
+
     function reformatText() {
         const input = document.getElementById("textkeywords").value;
         return removeAccents(input).replace(/,/g, " / ").toUpperCase();
@@ -170,9 +174,9 @@ function generateLegend(saveToHist = false) {
     const creditPhoto = document.getElementById('photographer').value;
     const formattedText = reformatText();
 
-    const legendForm = `${removeAccents(description)} / ${cityInput} / ${formattedDate} / Photo ${creditPhoto} / ${formattedText}`;
+    const legendForm = `${sanitize(description)} / ${cityInput} / ${formattedDate} / Photo ${creditPhoto} / ${formattedText}`;
     document.getElementById('legendTxt').innerHTML = legendForm;
-    document.getElementById('titleDisplay').innerText = title;
+    document.getElementById('titleDisplay').innerText = sanitize(title);
 
     if (saveToHist === true) {
         addToHistory(title, legendForm);
