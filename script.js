@@ -159,7 +159,8 @@ function generateLegend(saveToHist = false) {
     }
 
     function sanitize(str) {
-        return removeAccents(str).replace(/['\u2019]/g, ' ');
+        // Couvre tous les types d'apostrophes : ' ' ʼ ʻ ` ´ ‚ ‛
+        return removeAccents(str).replace(/[\u0027\u0060\u00B4\u02B9\u02BB\u02BC\u2018\u2019\u201A\u201B]/g, ' ');
     }
 
     function reformatText() {
