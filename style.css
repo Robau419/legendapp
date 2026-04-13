@@ -592,6 +592,7 @@ input[type="date"] {
 
 /* Champ vide : léger fond ambré + bordure gauche */
 input[type="text"].field-empty,
+input[type="date"].field-empty,
 textarea.field-empty {
   border-color: var(--amber-300);
   background: #fffdf0;
@@ -599,6 +600,7 @@ textarea.field-empty {
 }
 
 input[type="text"].field-empty:focus,
+input[type="date"].field-empty:focus,
 textarea.field-empty:focus {
   border-color: var(--amber-400);
   box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.18);

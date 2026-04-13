@@ -162,7 +162,7 @@ function renderHistory() {
 
 // Surbrillance des champs vides + alerte date
 function updateFieldStates() {
-    ['title', 'description', 'city', 'photographer', 'textkeywords'].forEach(id => {
+    ['title', 'description', 'city', 'photographer', 'textkeywords', 'dateInput'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.classList.toggle('field-empty', el.value.trim() === '');
     });
@@ -296,6 +296,7 @@ document.getElementById('deleteAll').addEventListener('click', function() {
     document.getElementById('textkeywords').value = "";
     document.getElementById('title').value = "";
     document.getElementById('description').value = "";
+    document.getElementById('dateInput').value = "";
     document.getElementById('titleDisplay').innerText = "";
     document.getElementById('legendTxt').innerText = "";
     updateFieldStates();
