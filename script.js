@@ -162,10 +162,14 @@ function renderHistory() {
 
 // Surbrillance des champs vides + alerte date
 function updateFieldStates() {
-    ['title', 'description', 'city', 'photographer', 'textkeywords', 'dateInput'].forEach(id => {
+    ['title', 'description', 'city', 'textkeywords', 'dateInput'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.classList.toggle('field-empty', el.value.trim() === '');
     });
+
+    // Photographe vide OU contient uniquement la valeur par défaut
+    const photoEl = document.getElementById('photographer');
+    if (photoEl) photoEl.classList.toggle('field-empty', photoEl.value.trim() === '' || photoEl.value.trim() === 'Photographe');
 
     const dateEl = document.getElementById('dateInput');
     const today = new Date();
@@ -302,7 +306,15 @@ document.getElementById('deleteAll').addEventListener('click', function() {
     updateFieldStates();
 });
 
-// Copier le texte de la légende 
+// Bouton Illustration : ajoute "illustration" aux mots-clés
+document.getElementById('addIllustration').addEventListener('click', function() {
+    const kw = document.getElementById('textkeywords');
+    const val = kw.value.trim();
+    kw.value = val ? val + ', illustration' : 'illustration';
+    generateLegend();
+});
+
+// Copier le texte de la légende
 document.getElementById('copyLegend').addEventListener('click', function() {
     const legendText = document.getElementById('legendTxt').innerText;
     navigator.clipboard.writeText(legendText);    
