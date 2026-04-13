@@ -225,42 +225,36 @@ function filterCities() {
 
 // bouton de suppression de la ville
 document.getElementById('cityMoulins').addEventListener('click', function() {
-    var champTexte = document.getElementById('city');
-    champTexte.value = "Moulins";
+    document.getElementById('city').value = "Moulins";
+    generateLegend();
 });
 document.getElementById('cityYzeure').addEventListener('click', function() {
-    var champTexte = document.getElementById('city');
-    champTexte.value = "Yzeure";
+    document.getElementById('city').value = "Yzeure";
+    generateLegend();
 });
 document.getElementById('citySuppr').addEventListener('click', function() {
-    var champTexte = document.getElementById('city');
-    champTexte.value = "";
+    document.getElementById('city').value = "";
+    generateLegend();
 });
 document.getElementById('citySaintPourcainBesbre').addEventListener('click', function() {
-    var champTexte = document.getElementById('city');
-    champTexte.value = "Saint-Pourcain-sur-Besbre";
+    document.getElementById('city').value = "Saint-Pourcain-sur-Besbre";
+    generateLegend();
 });
 document.getElementById('citySaintPourcainSioule').addEventListener('click', function() {
-    var champTexte = document.getElementById('city');
-    champTexte.value = "Saint-Pourcain-sur-Sioule";
+    document.getElementById('city').value = "Saint-Pourcain-sur-Sioule";
+    generateLegend();
 });
 
 
 
 // POUR PRE REMPLIR SPORT
-// const team_one = document.getElementById('first-team').value;
-// const team_two=document.getElementById('second-team').value;
-// function getMatchText() {
-//     // Remplacez ceci par la logique pour obtenir le texte souhaité
-//     return "Match de football " + team_one + " et " + team_two;
-// }
-
 document.getElementById('foot-myf').addEventListener('click', function() {
     const team_two = document.getElementById('second-team').value;
     const titleTeam = `Match de football MYF contre ${team_two}`;
     document.getElementById('textkeywords').value = "MOULINS YZEURE FOOT, NATIONAL 3, SPORT,FOOTBALL";
     document.getElementById('title').value = titleTeam;
     document.getElementById('description').value = titleTeam;
+    generateLegend();
 });
 
 document.getElementById('foot-ac').addEventListener('click', function() {
@@ -271,6 +265,7 @@ document.getElementById('foot-ac').addEventListener('click', function() {
     document.getElementById('textkeywords').value = "ACADEMIE DE MOULINS, REGIONAL 2, SPORT,FOOTBALL";
     document.getElementById('title').value = titleTeam;
     document.getElementById('description').value = legendTeam;
+    generateLegend();
 });
 
 document.getElementById('rugby').addEventListener('click', function() {
@@ -281,6 +276,7 @@ document.getElementById('rugby').addEventListener('click', function() {
     document.getElementById('textkeywords').value = "RUGBY, REGIONAL 1, SPORT, FCM";
     document.getElementById('title').value = titleTeam;
     document.getElementById('description').value = legendTeam;
+    generateLegend();
 });
 
 document.getElementById('waterpolo').addEventListener('click', function() {
@@ -291,6 +287,7 @@ document.getElementById('waterpolo').addEventListener('click', function() {
     document.getElementById('textkeywords').value = "waterpolo, National 1, SPORT, water polo";
     document.getElementById('title').value = titleTeam;
     document.getElementById('description').value = legendTeam;
+    generateLegend();
 });
 
 // bouton de suppression de tous les champs
