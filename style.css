@@ -116,6 +116,7 @@ main {
   margin: 0 auto;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 18px;
   align-items: stretch;
   border: none;
@@ -125,7 +126,7 @@ main {
    Form Panel
    ===================================================== */
 .legend-make {
-  flex: 1;
+  flex: 1 1 420px; /* se rétrécit jusqu'à 420px, en dessous → wrap */
   min-width: 0;
 }
 
@@ -487,9 +488,8 @@ input[type="date"] {
    Preview Panel (#legend)
    ===================================================== */
 #legend {
-  width: 320px;
-  min-width: 280px;
-  flex-shrink: 0;
+  flex: 0 0 320px; /* largeur fixe, ne grandit/rétrécit pas */
+  min-width: 0;
   background: #fff;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
@@ -800,4 +800,66 @@ input[type="date"].date-warning {
 .block-photo {
   display: flex;
   flex-direction: column;
+}
+
+/* =====================================================
+   Responsive
+   ===================================================== */
+
+/* Quand l'aperçu passe en dessous du formulaire */
+@media (max-width: 780px) {
+  html, body {
+    height: auto;
+    overflow: auto;
+  }
+
+  main {
+    overflow-y: visible;
+    padding: 12px 14px 24px;
+  }
+
+  .legend-make {
+    flex-basis: 100%;
+  }
+
+  #legend {
+    flex: 1 1 100%;
+    position: static;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .history-section {
+    margin-top: 14px;
+  }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+  header {
+    padding: 8px 14px;
+  }
+
+  .header-logo {
+    font-size: 1.4rem;
+  }
+
+  .header-text h1 {
+    font-size: 1rem;
+  }
+
+  .default-legend {
+    padding: 12px 14px;
+  }
+
+  .sport-btns {
+    gap: 6px;
+  }
+
+  .btn-sport {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+  }
 }
