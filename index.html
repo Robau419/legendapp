@@ -25,7 +25,7 @@
       <div class="legend-make">
         <div class="default-legend">
 
-          <!-- Type de reportage -->
+          <!-- Type de reportage (pleine largeur) -->
           <div class="form-section">
             <div class="style-select">
               <label class="radio-pill">
@@ -39,7 +39,7 @@
             </div>
           </div>
 
-          <!-- Bloc sport -->
+          <!-- Bloc sport (pleine largeur, caché par défaut) -->
           <div id="select-sport-block">
             <fieldset class="sport-fieldset">
               <legend>Informations sportives</legend>
@@ -56,82 +56,97 @@
             </fieldset>
           </div>
 
-          <!-- Titre -->
-          <div class="form-group">
-            <label for="title">Titre</label>
-            <div class="input-row">
-              <input type="text" name="title" id="title" placeholder="Titre de la légende" tabindex="1" />
-              <button id="addToDescription" class="btn-icon" title="Insérer dans la description">&#8595;</button>
-            </div>
-          </div>
+          <!-- Grille 2 colonnes -->
+          <div class="form-grid">
 
-          <!-- Description -->
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" rows="3" placeholder="Description de la photo" tabindex="2"></textarea>
-          </div>
+            <!-- Colonne gauche -->
+            <div class="form-col">
 
-          <!-- Ville -->
-          <div class="form-group">
-            <label for="city">Lieu du reportage</label>
-            <div class="input-row">
-              <input type="text" id="city" list="city-list" name="city-list" value="" tabindex="3" placeholder="Saisir ou choisir une ville">
-              <datalist id="city-list">
-                <option value="Avermes"></option>
-                <option value="Moulins"></option>
-                <option value="Neuvy"></option>
-                <option value="Saint-Pourcain-sur-Besbre"></option>
-                <option value="Saint-Pourcain-sur-Sioule"></option>
-                <option value="Souvigny"></option>
-                <option value="Toulon-sur-Allier"></option>
-                <option value="Yzeure"></option>
-              </datalist>
-              <button id="citySuppr" class="btn-icon btn-clear" title="Effacer la ville">&#10005;</button>
-            </div>
-            <!-- Requis par script.js pour la fonction filterCities -->
-            <input type="text" id="searchCity" style="display:none" aria-hidden="true" />
-            <div class="city-chips">
-              <button id="cityMoulins" class="btn-chip" title="Raccourci: alt+m" accesskey="m">Moulins</button>
-              <button id="cityYzeure" class="btn-chip" title="Raccourci: alt+y" accesskey="y">Yzeure</button>
-              <button id="citySaintPourcainSioule" class="btn-chip">St-P/Sioule</button>
-              <button id="citySaintPourcainBesbre" class="btn-chip">St-P/Besbre</button>
-            </div>
-          </div>
+              <!-- Titre -->
+              <div class="form-group">
+                <label for="title">Titre</label>
+                <div class="input-row">
+                  <input type="text" name="title" id="title" placeholder="Titre de la légende" tabindex="1" />
+                  <button id="addToDescription" class="btn-icon" title="Insérer dans la description">&#8595;</button>
+                </div>
+              </div>
 
-          <!-- Photographe -->
-          <div class="form-group">
-            <label for="photographer">Photographe</label>
-            <input type="text" id="photographer" name="nom" value="Photographe" />
-          </div>
+              <!-- Description -->
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="2" placeholder="Description de la photo" tabindex="2"></textarea>
+              </div>
 
-          <!-- Mots-clés -->
-          <div class="form-group">
-            <label for="textkeywords">Mots-clés</label>
-            <textarea id="textkeywords" name="textkeywords" rows="3" placeholder="Mots-clés séparés par des virgules" tabindex="4"></textarea>
-          </div>
+              <!-- Ville -->
+              <div class="form-group">
+                <label for="city">Lieu du reportage</label>
+                <div class="input-row">
+                  <input type="text" id="city" list="city-list" name="city-list" value="" tabindex="3" placeholder="Saisir ou choisir une ville">
+                  <datalist id="city-list">
+                    <option value="Avermes"></option>
+                    <option value="Moulins"></option>
+                    <option value="Neuvy"></option>
+                    <option value="Saint-Pourcain-sur-Besbre"></option>
+                    <option value="Saint-Pourcain-sur-Sioule"></option>
+                    <option value="Souvigny"></option>
+                    <option value="Toulon-sur-Allier"></option>
+                    <option value="Yzeure"></option>
+                  </datalist>
+                  <button id="citySuppr" class="btn-icon btn-clear" title="Effacer la ville">&#10005;</button>
+                </div>
+                <!-- Requis par script.js pour la fonction filterCities -->
+                <input type="text" id="searchCity" style="display:none" aria-hidden="true" />
+                <div class="city-chips">
+                  <button id="cityMoulins" class="btn-chip" title="Raccourci: alt+m" accesskey="m">Moulins</button>
+                  <button id="cityYzeure" class="btn-chip" title="Raccourci: alt+y" accesskey="y">Yzeure</button>
+                  <button id="citySaintPourcainSioule" class="btn-chip">St-P/Sioule</button>
+                  <button id="citySaintPourcainBesbre" class="btn-chip">St-P/Besbre</button>
+                </div>
+              </div>
 
-          <!-- Date -->
-          <div class="form-group">
-            <label for="dateInput">Date du reportage</label>
-            <div class="date-row">
-              <input id="dateInput" type="date" tabindex="5" />
-              <label class="radio-pill compact">
-                <input type="radio" id="today" name="today" value="today" checked />
-                <span>Aujourd'hui</span>
-              </label>
-            </div>
-          </div>
+            </div><!-- /form-col gauche -->
 
-          <!-- Boutons d'action -->
-          <div class="form-actions">
-            <button onclick="generateLegend(true)" class="btn-primary" tabindex="6" accesskey="g" title="Raccourci: alt+g">
-              Générer la légende
-            </button>
-            <button id="deleteAll" class="btn-reset">Réinitialiser</button>
-          </div>
+            <!-- Colonne droite -->
+            <div class="form-col">
 
-        </div>
-      </div>
+              <!-- Photographe -->
+              <div class="form-group">
+                <label for="photographer">Photographe</label>
+                <input type="text" id="photographer" name="nom" value="Photographe" />
+              </div>
+
+              <!-- Mots-clés -->
+              <div class="form-group">
+                <label for="textkeywords">Mots-clés</label>
+                <textarea id="textkeywords" name="textkeywords" rows="2" placeholder="Mots-clés séparés par des virgules" tabindex="4"></textarea>
+              </div>
+
+              <!-- Date -->
+              <div class="form-group">
+                <label for="dateInput">Date du reportage</label>
+                <div class="date-row">
+                  <input id="dateInput" type="date" tabindex="5" />
+                  <label class="radio-pill compact">
+                    <input type="radio" id="today" name="today" value="today" checked />
+                    <span>Aujourd'hui</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Boutons d'action -->
+              <div class="form-actions">
+                <button onclick="generateLegend(true)" class="btn-primary" tabindex="6" accesskey="g" title="Raccourci: alt+g">
+                  Générer la légende
+                </button>
+                <button id="deleteAll" class="btn-reset">Réinitialiser</button>
+              </div>
+
+            </div><!-- /form-col droite -->
+
+          </div><!-- /form-grid -->
+
+        </div><!-- /default-legend -->
+      </div><!-- /legend-make -->
 
       <!-- Panneau aperçu -->
       <div id="legend">
@@ -154,7 +169,7 @@
         </div>
       </div>
 
-    </div>
+    </div><!-- /container -->
 
     <!-- Historique des générations -->
     <section class="history-section">
