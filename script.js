@@ -162,10 +162,14 @@ function renderHistory() {
 
 // Surbrillance des champs vides + alerte date
 function updateFieldStates() {
-    ['title', 'description', 'city', 'photographer', 'textkeywords', 'dateInput'].forEach(id => {
+    ['title', 'description', 'city', 'textkeywords', 'dateInput'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.classList.toggle('field-empty', el.value.trim() === '');
     });
+
+    // Photographe vide OU contient uniquement la valeur par défaut
+    const photoEl = document.getElementById('photographer');
+    if (photoEl) photoEl.classList.toggle('field-empty', photoEl.value.trim() === '' || photoEl.value.trim() === 'Photographe');
 
     const dateEl = document.getElementById('dateInput');
     const today = new Date();
