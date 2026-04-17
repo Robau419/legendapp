@@ -208,7 +208,7 @@ function generateLegend(saveToHist = false) {
     document.getElementById('titleDisplay').innerText = sanitize(title);
 
     if (saveToHist === true) {
-        addToHistory(title, legendForm);
+        addToHistory(sanitize(title), legendForm);
     }
 
     updateFieldStates();
